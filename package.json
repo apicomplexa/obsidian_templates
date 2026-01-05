@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w"
+    "build:dv": "node \"build-dataviews.cjs\""
   },
   "devDependencies": {
+    "obsidian-dataview": "^0.5.68",
     "typescript": "^5.3.0"
   }
 }

@@ -1,18 +1,15 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "amd",
+    "module": "none",
     "strict": true,
     "rootDir": ".",
-    "outDir": "dist",
     "declaration": false,
     "skipLibCheck": true,
-    "types": [],
-    "lib": ["ES2020"]
+    "lib": ["ES2020"],
+
   },
   "include": [
-    "dataviews/**/index.ts",
-    "Scripts/**/index.ts",
-    ".types/**/*.d.ts"
+    ".types/*.d.ts",
   ]
 }

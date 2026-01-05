@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist/indexPage"
+  },
+  "include": [
+    "**/view.ts",
+    "../../.types/global.d.ts"
+  ]
+}
