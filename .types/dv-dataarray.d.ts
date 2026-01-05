@@ -1,14 +1,14 @@
 /** A function which maps an array element to some value. */
-export type ArrayFunc<T, O> = (elem: T, index: number, arr: T[]) => O;
+type ArrayFunc<T, O> = (elem: T, index: number, arr: T[]) => O;
 
 /** A function which compares two types. */
-export type ArrayComparator<T> = (a: T, b: T) => number;
+type ArrayComparator<T> = (a: T, b: T) => number;
 
 /**
  * Proxied interface which allows manipulating array-based data. All functions on a data array produce a NEW array
  * (i.e., the arrays are immutable).
  */
-export interface DataArray<T> {
+declare interface DataArray<T> {
     /** The total number of elements in the array. */
     length: number;
 

@@ -8,6 +8,7 @@ import { EditorView, ViewPlugin } from '@codemirror/view';
 import * as CodeMirror from 'codemirror';
 import * as Moment from 'moment';
 
+
 declare global {
     interface ObjectConstructor {
         isEmpty(object: Record<string, any>): boolean;
