@@ -92,36 +92,3 @@ for (let index of indexes) {
     displayLastNotes(pagesWithSubIndexes);
   }
 }
-/**
- * Extract all subindexes of given index existing in given notes
- * @param {string} index
- * @param {any} notesWithIndex
- * @returns {Array<string, number>} Sorted array of subindexes
- */
-const getAllSubindexes = (index, notesWithIndex) => {
-  const subindexesRepeated = notesWithIndex.flatMap((p) => {
-    try {
-      let fms = p.file.frontmatter[index];
-      return fms;
-    } catch (e) {}
-  });
-  const subindexes = [...new Set(subindexesRepeated)].sort((a, b) =>
-    a.localeCompare(b)
-  );
-  const countedSubindexes = subindexes.map( si => [
-    si,
-    subindexesRepeated.filter(s => s === si).length
-  ])
-  return countedSubindexes;
-};
-
-const displayCategogyIndex = (index) => {
-  notesWithIndex = dv
-    .pages("-#dv_exclude")
-    .filter((p) => Object.keys(p.file.frontmatter).includes(index));
-  const subindexes = getAllSubindexes(index, notesWithIndex);
-
-  const queryNotesWithIndexWithoutSubindexes = subindexes
-    .map((subindex) => `-["${index}":${subindex}]`)
-    .join("");
-};
