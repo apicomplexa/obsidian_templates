@@ -22,6 +22,6 @@ tags:
 type: 🗂️index
 ---
 
- ```dataviewjs
-dv.view('_.Settings/Templates/dataviews/IndexDataview')
+```dataviewjs
+dv.view('_.Settings/Templates/dist/dataviews/indexPage')
 ```

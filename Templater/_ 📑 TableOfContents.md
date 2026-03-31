@@ -1,3 +1,10 @@
+---
+aliases: 
+date: 02-11-2025
+parent:
+tags: 
+---
+
 # Оглавление
 
 ```dataviewjs
