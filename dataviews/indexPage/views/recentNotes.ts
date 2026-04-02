@@ -4,6 +4,6 @@ const displayRecentNotes = (notes: DataArray<Note>, limit = 10): void => {
     notes
       .sort((note) => note.file.mtime, "desc")
       .slice(0, limit)
-      .map((n) => `${n.file.link} \`(edited: ${new Date(n.file.mtime).toLocaleString()})\``)
+      .map((n) => `${n.file.link} \`(${new Date(n.file.mtime).toLocaleString()})\``)
   );
 };

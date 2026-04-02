@@ -5,6 +5,7 @@
 /// <reference path="./views/recentNotes.ts"/>
 /// <reference path="./views/searchTemplate.ts"/>
 /// <reference path="./dvWrappers/getIndexes.ts"/>
+/// <reference path="./views/singleIndexView.ts"/>
 
 /// Генерация подзапросов по подиндексам
 const buildSubindexQueries = (
@@ -60,18 +61,11 @@ const displayIndexes = (notes: Note[], currentFm: Frontmatter) => {
       const uniqueSubindexes = [...new Set(subindexesRepeated)].sort((a, b) =>
         a.localeCompare(b)
       );
-      dv.header(1, `\`${index}\``);
-      dv.list(
-        buildSubindexQueries(
-          index,
-          uniqueSubindexes,
-          subindexesRepeated,
-          pagesWithIndex.length
-        )
-      );
-      dv.paragraph("\n\n");
-      displayPinnedNotes(pagesWithIndex);
-      displayRecentNotes(pagesWithIndex);
+      (new SingleIndexView({
+        index,
+        pagesWithIndex,
+        subindexes: uniqueSubindexes.map((si) => ({ label: si, count: subindexesRepeated.filter((s) => s === si).length })),
+      })).render()
     } else {
       const subindexesToShow = currentIndexValue.filter((si) => si !== "index");
       dv.header(1, `\`${subindexesToShow.join(" + ")}\``);
