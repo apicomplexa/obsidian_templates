@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
 
+const TSC = path.join(__dirname, "node_modules", ".bin", "tsc");
+
 const SRC_ROOT = path.join(__dirname, "dataviews");
 const DIST_ROOT = path.join(__dirname, "dist", "dataviews");
 
@@ -25,7 +27,7 @@ folders.forEach(folder => {
 
   const outFile = path.join(distFolder, "view.js");
 
-  const cmd = `tsc --project "${tsconfig}" --outFile "${outFile}"`;
+  const cmd = `"${TSC}" --project "${tsconfig}" --outFile "${outFile}"`;
   console.log(`Сборка ${folder}: ${cmd}`);
   execSync(cmd, { stdio: "inherit" });
 

@@ -7,6 +7,3 @@ summary:
 tags: []
 type: 📄note
 ---
-
-> [!$] `$=dv.current().file.name`
-> `$=dv.current().summary`
