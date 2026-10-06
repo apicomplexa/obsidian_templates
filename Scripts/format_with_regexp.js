@@ -10,19 +10,32 @@ module.exports = async (params) => {
     const file = app.workspace.getActiveFile();
 
     if (file) {
+        const rawOrigMarkdown = await app.vault.read(file)
+
+        // Копию уже снял make_tech_copy.js (макрос «Export: DOC») — тогда она содержит
+        // исходник ДО раскрытия ссылок, и перезаписывать её нельзя: здесь в файле уже
+        // раскрытый текст. Только заменяем синтаксис.
+        const marker = rawOrigMarkdown.match(MARKER_RE)
+        if (marker && app.vault.getAbstractFileByPath(marker[1].trim())) {
+            await app.vault.modify(file, formateNote(rawOrigMarkdown))
+            return
+        }
+
+        // Самостоятельный запуск (макрос «🖨️Make tech copy»): снимаем копию сами.
         const techCopyPath = `TECH_COPY_${file.name}`
         const oldTechCopy = app.vault.getAbstractFileByPath(techCopyPath)
         if (oldTechCopy) {
             await app.vault.delete(oldTechCopy)
         }
-        const rawOrigMarkdown = await app.vault.read(file)
 
         const techCopy = await app.vault.create(techCopyPath, rawOrigMarkdown, {ctime: file.stat.ctime})
 
         await app.vault.modify(file, formateNote(rawOrigMarkdown, techCopy.path))
     }
-    
+
 }
+
+const MARKER_RE = /(?:%%|<!--\s*)TECH_COPY_PATH--(.*?)(?:%%|\s*-->)/u
 
 const REPLACEMENTS = [
     [/\[!\$\][+-]?/gu, '➡️'],
@@ -66,7 +79,7 @@ const REPLACEMENTS = [
 ]
 /**
  * @param {string} noteMark 
- * @param {string} tech_copy_path
+ * @param {string} [tech_copy_path] не задан — маркер уже стоит в заметке
  * @returns {string}
  */
 const formateNote = (noteMark, tech_copy_path) => {
@@ -74,6 +87,9 @@ const formateNote = (noteMark, tech_copy_path) => {
         // @ts-ignore
         noteMark = noteMark.replace(replacement[0], replacement[1])
     }
-    noteMark += `\n\n%%TECH_COPY_PATH--${tech_copy_path}%%`
+    if (tech_copy_path) {
+        // HTML-комментарий: pandoc выбрасывает его из DOCX, %%…%% попадал бы в текст
+        noteMark += `\n\n<!-- TECH_COPY_PATH--${tech_copy_path} -->\n`
+    }
     return noteMark
 }
