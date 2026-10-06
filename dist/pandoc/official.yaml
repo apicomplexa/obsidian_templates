@@ -1,0 +1,5 @@
+# Стиль экспорта «официальный» — подключается макросом «Export: DOC» (docx-style-begin)
+# поверх pandoc-defaults.yaml хранилища. Собрано obsidian-kit из src/pandoc — не править.
+reference-doc: ${.}/reference-official.docx
+filters:
+  - ${.}/docx-captions.lua

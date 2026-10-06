@@ -1,0 +1,3 @@
+dist/** linguist-generated=true
+pixi.lock linguist-generated=true -diff
+package-lock.json linguist-generated=true

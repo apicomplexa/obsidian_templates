@@ -1,12 +1,16 @@
 {
-  "name": "obsidian-templates",
+  "name": "obsidian-kit",
   "private": true,
   "type": "module",
   "scripts": {
-    "build:dv": "node \"build-dataviews.cjs\""
+    "build": "node build.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
-    "obsidian-dataview": "^0.5.68",
-    "typescript": "^5.3.0"
+    "@types/node": "^24.19.1",
+    "esbuild": "^0.28.2",
+    "fflate": "^0.8.3",
+    "obsidian": "^1.13.1",
+    "typescript": "^5.9.3"
   }
 }

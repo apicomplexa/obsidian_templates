@@ -1,0 +1,7 @@
+# Стиль экспорта «для телефона» — подключается макросом «Export: DOC» (docx-style-begin)
+# поверх pandoc-defaults.yaml хранилища. Собрано obsidian-kit из src/pandoc — не править.
+reference-doc: ${.}/reference-mobile.docx
+filters:
+  - ${.}/docx-captions.lua
+metadata:
+  toc: false
