@@ -41,10 +41,10 @@ pixi run typecheck   # tsc --noEmit
 
 Макрос «Export: DOC» выполняет шаги в таком порядке:
 
-1. `make-tech-copy` — снимает техническую копию заметки;
-2. `convert-links` — раскрывает встраивания и переводит ссылки в markdown;
-3. `format-with-regexp` — заменяет callout'ы и чекбоксы на эмодзи;
-4. `docx-style-begin` — спрашивает стиль и подменяет настройки плагина pandoc;
+1. `docx-style-begin` — спрашивает стиль и подменяет настройки плагина pandoc;
+2. `make-tech-copy` — снимает техническую копию заметки;
+3. `convert-links` — раскрывает встраивания и переводит ссылки в markdown;
+4. `format-with-regexp` — заменяет callout'ы и чекбоксы на эмодзи;
 5. команда плагина pandoc;
 6. `docx-style-finish` — переносит готовый docx и возвращает настройки плагина;
 7. `restore-tech-copy` — возвращает исходный текст заметки.
